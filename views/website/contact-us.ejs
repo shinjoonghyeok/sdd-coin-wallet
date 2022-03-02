@@ -1,0 +1,45 @@
+<% include ./../_website_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_website_theme/nav.ejs %>
+	<!-- Banner -->
+	<div class="banner static-banner clearfix ">
+		<div class="banner_text">Contact Us</div>
+		<img src="/images/banner_page.png" alt="">
+	</div>
+	<section class=" pv-45 clearfix light-gray-bg ">
+		<div class="container mb-5 ">
+			<div class="row ">
+				<div class="col-lg-12 " data-animation-effect="fadeInLeftSmall">
+				<% if (message_sent != '') { %>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong><%= message_sent %></strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<% } %>
+					<div class="pb-2">* All fields are required</div>
+					<form class="margin-clear " method="POST" action="/contact-us">
+						<div class="form-group has-feedback mb-10 ">
+							<label class="sr-only " for="name ">Title</label>
+							<input type="text " class="form-control form-contact form-control-lg " id="name " placeholder="<%= __("contact_Title") %> " name="title" required>
+							<i class="fa fa-user form-control-feedback "></i>
+						</div>
+						<div class="form-group has-feedback mb-10 ">
+							<label class="sr-only " for="email ">Email address</label>
+							<input type="email " class="form-control form-contact form-control-lg " id="email " placeholder="<%= __("contact_Email") %> " name="email" required>
+							<i class="fa fa-envelope form-control-feedback "></i>
+						</div>
+						<div class="form-group has-feedback mb-10 mb-4">
+							<label class="sr-only " for="message ">Message</label>
+							<textarea class="form-control form-contact" rows="4 " id="message " placeholder="<%= __("contact_Message") %> " name="message" required></textarea>
+							<i class="fa fa-pencil form-control-feedback "></i>
+						</div>
+						<button type="submit " class="margin-clear submit-button btn btn-default btn-lg  "> <%= __("common_Send") %></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<% include ./../_website_theme/footer.ejs %>

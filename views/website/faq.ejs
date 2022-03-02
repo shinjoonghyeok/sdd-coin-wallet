@@ -1,0 +1,39 @@
+<% include ./../_website_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_website_theme/nav.ejs %>
+	<!-- Banner -->
+	<div class="banner static-banner clearfix ">
+		<div class="banner_text">FAQ</div>
+		<img src="/images/banner_page.png" alt="">
+	</div>
+	<!-- Content -->
+	<section id="about" class=" pv-45 clearfix ">
+		<div class="container pb-5">
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-12 " data-animation-effect="fadeInDownSmall">
+					<!--Accordion wrapper-->
+					<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+						<% for(var i=0; i<faq_list.length; i++) { %>
+						<div class="card">
+							<div class="card-header" role="tab" id="headingOne1">
+								<a data-toggle="collapse" data-parent="#accordionEx" href="#faqContent<%= i %>" aria-expanded="true" aria-controls="faq_<%= i %>">
+									<h5 class="mb-0"><%= faq_list[i].faq_title %> </h5>
+								</a>
+							</div>
+							<div id="faqContent<%= i %>" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+								<div class="card-body" style="white-space: pre-line;">
+									<%= faq_list[i].faq_content %>
+								</div>
+							</div>
+						</div>
+						<% } %>
+						
+					</div>
+					<!-- Accordion wrapper -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->      
+</div>
+<% include ./../_website_theme/footer.ejs %>

@@ -1,0 +1,104 @@
+<!-- Modal -->
+<div class="modal fade" id="memberTransaction" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Transaction</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li clearstatcacheass="nav-item"><a class="nav-link active" data-toggle="tab" href="#Transaction">Transaction</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Token">Token</a></li>
+				</ul>
+
+
+				<div class="tab-content">
+					<div id="Transaction" class="admin-container tab-pane active" style="padding:0px;overflow-x:auto;">
+						<table id="transactionTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th class="answer-td-w100 text-center">txHash</th>
+									<th class="answer-td-w100 text-center">Application Date</th>
+									<th class="answer-td-w80 text-center">Age</th>
+									<th class="answer-td-w100 text-center">From</th>
+									<th class="answer-td-w100 text-center">To</th>
+									<th class="answer-td-w50 text-center">Value</th>
+									<th class="answer-td-w50 text-center">Fee</th>
+									<th class="answer-td-w50 text-center">Gas Price</th>
+									<th class="answer-td-w50 text-center">Gas Used</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i=0; i<txList.length; i++) { %>
+								<tr <% if(txList[i].isError=="1") { %>class="answer-str-error"<% } %> style="font-size: 11px;">
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= txList[i].hash %></td>
+									<td class="answer-td-w100 text-center"><%= txList[i].timeStamp %></td>
+									<td class="answer-td-w80 text-center"><%= txList[i].passedTime %></td>
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= txList[i].from %></td>
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= txList[i].to %></td>
+									<td class="answer-td-w50 text-center"><%= txList[i].value %></td>
+									<td class="answer-td-w50 text-center"><%= txList[i].txFee %></td>
+									<td class="answer-td-w50 text-center"><%= txList[i].gasPrice %></td>
+									<td class="answer-td-w50 text-center"><%= txList[i].gasUsed %></td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+
+					<div id="Token" class="admin-container tab-pane fade" style="padding: 0px;overflow-x:auto;">
+						<table id="tokenTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th class="answer-td-w100 text-center">txHash</th>
+									<th class="answer-td-w100 text-center">Application Date</th>
+									<th class="answer-td-w80 text-center">Age</th>
+									<th class="answer-td-w100 text-center">From</th>
+									<th class="answer-td-w100 text-center">To</th>
+									<th class="answer-td-w100 text-center">Contact</th>
+									<th class="answer-td-w50 text-center">Value</th>
+									<th class="answer-td-w50 text-center">Fee</th>
+									<th class="answer-td-w50 text-center">Gas Price</th>
+									<th class="answer-td-w50 text-center">Gas Used</th>
+									<th class="answer-td-w130 text-center">Token Info</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i=0; i<tokenList.length; i++) { %>
+								<tr <% if(tokenList[i].isError=="1") { %>class="answer-str-error"<% } %> style="font-size: 11px;">
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= tokenList[i].hash %></td>
+									<td class="answer-td-w100 text-center"><%= tokenList[i].timeStamp %></td>
+									<td class="answer-td-w80 text-center"><%= tokenList[i].passedTime %></td>
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= tokenList[i].from %></td>
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= tokenList[i].to %></td>
+									<td class="answer-td-w100 text-left answer-overflow-ellipsis mightOverflow"><%= tokenList[i].contractAddress %></td>
+									<td class="answer-td-w50 text-center"><%= tokenList[i].value %></td>
+									<td class="answer-td-w50 text-center"><%= tokenList[i].txFee %></td>
+									<td class="answer-td-w50 text-center"><%= tokenList[i].gasPrice %></td>
+									<td class="answer-td-w50 text-center"><%= tokenList[i].gasUsed %></td>
+									<td class="answer-td-w130 text-left answer-overflow-ellipsis mightOverflow"><%= tokenList[i].tokenSymbol %> ( <%= tokenList[i].tokenName %> )</td>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$('.mightOverflow').each(function() {
+		var $ele = $(this);
+		if (this.offsetWidth < this.scrollWidth)
+			$ele.attr('title', $ele.text());
+	});
+</script>

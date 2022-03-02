@@ -1,0 +1,96 @@
+<table id="memberTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th class="answer-td-w50 text-center">No</th>
+			<th class="answer-td-w110 text-center">EMail ID</th>
+			<th class="answer-td-w140 text-center">Wallet Address</th>
+			<th class="answer-td-w140 text-center">Ether Address</th>
+			<th class="answer-td-w80 text-center">Token</th>
+			<th class="answer-td-w110 text-center">Recommender ID</th>
+			<th class="answer-td-w100 text-center">Wallet Creation Date</th>
+			<th class="answer-td-w120 text-center"></th>
+		</tr>
+	</thead>
+	<tbody style="font-size:12px;">
+		<% for(var i=0; i<member_list.length; i++) { %>
+		<tr>
+			<td class="answer-td answer-td-w50 text-center"><%= i+1 %></td>
+			<td class="answer-td answer-td-w110 text-left answer-overflow-ellipsis mightOverflow"><%= member_list[i].email %></td>
+			<td class="answer-td answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= member_list[i].sdd_coin_address %></td>
+			<td class="answer-td answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= member_list[i].ether_address %></td>
+			<td class="answer-td answer-td-w80 text-center"><%= member_list[i].token_balance %></td>
+			<td class="answer-td answer-td-w110 text-center answer-overflow-ellipsis mightOverflow"><%= member_list[i].recommender_id %></td>
+			<td class="answer-td answer-td-w100 text-center"><%= member_list[i].reg_date %></td>
+			<td class="answer-td answer-td-w120 text-center">
+				<button class="btn btn-warning btn-sm" onclick="modifyMember('<%= member_list[i].sdd_coin_address %>')"> Info</button>
+				<button class="btn btn-info btn-sm" onclick="transactionMember('<%= member_list[i].sdd_coin_address %>')"> Transaction</button>
+			</td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
+
+<script>
+	
+	function modifyMember(address) {
+		loading(true,"memberDetail");
+		$('#memberDetail').load("/admin/member-detail/" + address, function(response, status, xhr) {
+			if (status === "success") {
+				$("#memberInfo").modal({ show: true });
+			}
+			loading(false,"memberDetail");
+		});
+	}
+	
+	function transactionMember(address) {
+		loading(true,"transactionDetail");
+		$('#transactionDetail').load("/admin/member-transaction/" + address, function(response, status, xhr) {
+			if (status === "success") {
+				$('#transactionTable').DataTable({
+					"searching": false,
+					"pageLength": 15,
+					"lengthChange": false,
+					"order": [[ 1, "desc" ]]
+				});
+				
+				$('#tokenTable').DataTable({
+					"searching": false,
+					"pageLength": 15,
+					"lengthChange": false,
+					"order": [[ 1, "desc" ]]
+				});
+				
+				$("#memberTransaction").modal({ show: true });
+			}
+			loading(false,"transactionDetail");
+		});
+	}
+	
+	/**
+	$("#memberTable tr").on("click", function() {
+
+
+		console.log("What the....")
+		
+		var getParm = "";
+		var tr = $(this);
+		var td = tr.children();
+
+		if(td.eq(1).text()=="") getParm = "none";
+		else getParm = td.eq(2).text();
+		$('#memberDetail').load("/admin/member-detail/" + getParm, function(response, status, xhr) {
+			if (status === "success") {
+				$("#memberInfo").modal({ show: true });
+			}
+		});
+		
+	});
+	**/
+	
+	$('.mightOverflow').each(function() {
+		var $ele = $(this);
+		if (this.offsetWidth < this.scrollWidth)
+			$ele.attr('title', $ele.text());
+	});
+</script>

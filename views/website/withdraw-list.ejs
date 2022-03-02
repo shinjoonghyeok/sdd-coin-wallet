@@ -1,0 +1,111 @@
+<ul class="nav nav-tabs">
+	<li clearstatcacheass="nav-item"><a class="nav-link active" data-toggle="tab" href="#Transaction">Transaction</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Token">Token</a></li>
+</ul>
+
+
+<div class="tab-content" id="searchTable">
+	<div id="Transaction" class="container tab-pane active" style="padding: 0px;">
+		<table id="txList" class="table table-bordered" style="width:100%">
+			<thead style="font-weight:bold;">
+				<tr>
+					<th class="answer-td-w70 text-center"><%= __("wallet_Table1") %></th>
+					<th class="answer-td-w70 text-center"><%= __("wallet_Table2") %></th>
+					<th class="answer-td-w110 text-center"><%= __("wallet_Table3") %></th>
+					<th class="answer-td-w100 text-center"><%= __("wallet_Table4") %></th>
+					<th class="answer-td-w140 text-center"><%= __("wallet_Table5") %></th>
+					<th class="answer-td-w140 text-center"><%= __("wallet_Table6") %></th>
+					<th class="answer-td-w80 text-center"><%= __("wallet_Table7") %></th>
+					<th class="answer-td-w80 text-center"><%= __("wallet_Table8") %></th>
+				</tr>
+			</thead>
+			<tbody style="font-size:12px;">
+				<% for(var i=0; i<txList.length; i++) { %>
+				<tr <% if(txList[i].isError=="1") { %>class="answer-str-error"<% } %> style="cursor:pointer;">
+					<td class="answer-td-w70 text-center"><%= txList[i].division %></td>
+					<td class="answer-td-w70 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].hash %></td>
+					<td class="answer-td-w110 text-center"><%= txList[i].timeStamp %></td>
+					<td class="answer-td-w100 text-center"><%= txList[i].passedTime %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].from %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].to %></td>
+					<td class="answer-td-w80 text-center"><%= txList[i].value %></td>
+					<td class="answer-td-w80 text-center"><%= txList[i].txFee %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="Token" class="container tab-pane fade" style="padding: 0px;">
+		<table id="tokenList" class="table table-bordered" style="width:100%">
+			<thead style="font-weight:bold;">
+				<tr>
+					<th class="answer-td-w70 text-center"><%= __("wallet_Table1") %></th>
+					<th class="answer-td-w70 text-center"><%= __("wallet_Table2") %></th>
+					<th class="answer-td-w110 text-center"><%= __("wallet_Table3") %></th>
+					<th class="answer-td-w100 text-center"><%= __("wallet_Table4") %></th>
+					<th class="answer-td-w140 text-center"><%= __("wallet_Table5") %></th>
+					<th class="answer-td-w140 text-center"><%= __("wallet_Table6") %></th>
+					<th class="answer-td-w80 text-center"><%= __("wallet_Table7") %></th>
+					<th class="answer-td-w80 text-center"><%= __("wallet_Table8") %></th>
+					<th class="answer-td-w80 text-center"><%= __("wallet_Table9") %></th>
+				</tr>
+			</thead>
+			<tbody style="font-size:12px;">
+				<% for(var i=0; i<tokenList.length; i++) { %>
+				<tr style="cursor:pointer;">
+					<td class="answer-td-w70 text-center"><%= tokenList[i].division %></td>
+					<td class="answer-td-w70 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].hash %></td>
+					<td class="answer-td-w110 text-center"><%= tokenList[i].timeStamp %></td>
+					<td class="answer-td-w100 text-center"><%= tokenList[i].passedTime %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].from %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].to %></td>
+					<td class="answer-td-w80 text-center"><%= tokenList[i].value %></td>
+					<td class="answer-td-w80 text-center"><%= tokenList[i].txFee %></td>
+					<td class="answer-td-w80 text-center"><%= tokenList[i].tokenSymbol %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<script>
+$('.mightOverflow').each(function() {
+    var $ele = $(this);
+    if (this.offsetWidth < this.scrollWidth)
+        $ele.attr('title', $ele.text());
+});
+
+	
+$("#tokenList tr").on("click", function() {
+	var getParm = "";
+	var tr = $(this);
+	var td = tr.children();
+
+	if(td.eq(1).text()=="") getParm = "none";
+	else getParm = td.eq(1).text();
+	$('#outside').load("/withdraw-detail/" + getParm, function(response, status, xhr) {
+		if (status === "success") {
+			$("#widthdrawDetail").modal({ show: true });
+		}
+	});
+
+});
+	
+$("#txList tr").on("click", function() {
+	var getParm = "";
+	var tr = $(this);
+	var td = tr.children();
+
+	if(td.eq(1).text()=="") getParm = "none";
+	else getParm = td.eq(1).text();
+	$('#outside').load("/withdraw-detail/" + getParm, function(response, status, xhr) {
+		if (status === "success") {
+			$("#widthdrawDetail").modal({ show: true });
+		}
+	});
+});
+</script>
+

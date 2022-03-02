@@ -1,0 +1,155 @@
+<ul class="nav nav-tabs">
+	<li clearstatcacheass="nav-item"><a class="nav-link active" data-toggle="tab" href="#Transaction">Transaction(etherscan)</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Ethereum">Ethereum</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Token">Token</a></li>
+</ul>
+
+
+<div class="tab-content">
+	<div id="Transaction" class="admin-container tab-pane active" style="padding: 0px;">
+		<table id="txTable" class="table table-bordered" style="width:100%;margin-top:0px !important;">
+			<thead style="font-weight:bold;">
+				<tr>
+					<th class="answer-td-w110 text-center">Application Date</th>
+					<th class="answer-td-w100 text-center">txHash</th>
+					<th class="answer-td-w140 text-center">From</th>
+					<th class="answer-td-w140 text-center">To</th>
+					<th class="answer-td-w80 text-center">Value</th>
+					<th class="answer-td-w80 text-center">Fee</th>
+					<th class="answer-td-w100 text-center">Age</th>
+				</tr>
+			</thead>
+			<tbody style="font-size:12px;">
+				<% for(var i=0; i<txList.length; i++) { %>
+				<tr <% if(txList[i].isError=="1") { %>class="answer-str-error"<% } %> style="cursor:pointer;">
+					<td class="answer-td-w110 text-center"><%= txList[i].timeStamp %></td>
+					<td class="answer-td-w100 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].hash %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].from %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= txList[i].to %></td>
+					<td class="answer-td-w80 text-center"><%= txList[i].value %></td>
+					<td class="answer-td-w80 text-center"><%= txList[i].txFee %></td>
+					<td class="answer-td-w100 text-center"><%= txList[i].passedTime %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="Ethereum" class="admin-container tab-pane fade" style="padding: 0px;">
+		<table id="etherTable" class="table table-bordered" style="width:100%;margin-top:0px !important;">
+			<thead style="font-weight:bold;">
+				<tr>
+					<th class="answer-td-w70 text-center">Application Date</th>
+					<th class="answer-td-w70 text-center">txHash</th>
+					<th class="answer-td-w140 text-center">From</th>
+					<th class="answer-td-w140 text-center">To</th>
+					<th class="answer-td-w80 text-center">Value</th>
+					<th class="answer-td-w80 text-center">Fee</th>
+					<th class="answer-td-w140 text-center">Result</th>
+					<th class="answer-td-w100 text-center">Age</th>
+				</tr>
+			</thead>
+			<tbody style="font-size:12px;">
+				<% for(var i=0; i<etherList.length; i++) { %>
+				<tr <% if(!etherList[i].withdraw_success) { %>class="answer-str-error"<% } %> style="cursor:pointer;">
+					<td class="answer-td-w70 text-center"><%= etherList[i].show_date %></td>
+					<td class="answer-td-w70 text-center answer-overflow-ellipsis mightOverflow"><%= etherList[i].withdraw_txhash %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= etherList[i].from %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= etherList[i].to %></td>
+					<td class="answer-td-w80 text-center"><%= etherList[i].withdraw_amount.value %></td>
+					<td class="answer-td-w80 text-center"><%= etherList[i].withdraw_amount.value %></td>
+					<td class="answer-td-w140 text-center"><%= etherList[i].withdraw_result %></td>
+					<td class="answer-td-w100 text-center"><%= etherList[i].show_age %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="Token" class="admin-container tab-pane fade" style="padding: 0px;">
+		<table id="tokenTable" class="table table-bordered" style="width:100%;margin-top:0px !important;">
+			<thead style="font-weight:bold;">
+				<tr>
+					<th class="answer-td-w70 text-center">Application Date</th>
+					<th class="answer-td-w70 text-center">txHash</th>
+					<th class="answer-td-w140 text-center">From</th>
+					<th class="answer-td-w140 text-center">To</th>
+					<th class="answer-td-w80 text-center">Value</th>
+					<th class="answer-td-w80 text-center">Fee</th>
+					<th class="answer-td-w140 text-center">Result</th>
+					<th class="answer-td-w100 text-center">Age</th>
+				</tr>
+			</thead>
+			<tbody style="font-size:12px;">
+				<% for(var i=0; i<tokenList.length; i++) { %>
+				<tr <% if(!tokenList[i].withdraw_success) { %>class="answer-str-error"<% } %> style="cursor:pointer;">
+					<td class="answer-td-w70 text-center"><%= tokenList[i].show_date %></td>
+					<td class="answer-td-w70 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].withdraw_txhash %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].from %></td>
+					<td class="answer-td-w140 text-center answer-overflow-ellipsis mightOverflow"><%= tokenList[i].to %></td>
+					<td class="answer-td-w80 text-center"><%= tokenList[i].withdraw_amount.value %></td>
+					<td class="answer-td-w80 text-center"><%= tokenList[i].withdraw_amount.value %></td>
+					<td class="answer-td-w140 text-center"><%= tokenList[i].withdraw_result %></td>
+					<td class="answer-td-w100 text-center"><%= tokenList[i].show_age %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<script>
+	
+	$("#txTable tr").on("click", function() {
+		var getParm = "";
+		var tr = $(this);
+		var td = tr.children();
+
+		if(td.eq(1).text()=="") getParm = "none";
+		else getParm = td.eq(1).text();
+		$('#transactionDetail').load("/admin/transaction-detail/" + getParm, function(response, status, xhr) {
+			if (status === "success") {
+				$("#transactionInfo").modal({ show: true });
+			}
+		});
+	});
+	
+	$("#etherTable tr").on("click", function() {
+		var getParm = "";
+		var tr = $(this);
+		var td = tr.children();
+
+		if(td.eq(1).text()=="") getParm = "none";
+		else getParm = td.eq(1).text();
+		$('#transactionDetail').load("/admin/transaction-detail/" + getParm, function(response, status, xhr) {
+			if (status === "success") {
+				$("#transactionInfo").modal({ show: true });
+			}
+		});
+	});
+	
+	$("#tokenTable tr").on("click", function() {
+		var getParm = "";
+		var tr = $(this);
+		var td = tr.children();
+
+		if(td.eq(1).text()=="") getParm = "none";
+		else getParm = td.eq(1).text();
+		$('#transactionDetail').load("/admin/transaction-detail/" + getParm, function(response, status, xhr) {
+			if (status === "success") {
+				$("#transactionInfo").modal({ show: true });
+			}
+		});
+	});
+	
+	$('.mightOverflow').each(function() {
+		var $ele = $(this);
+		if (this.offsetWidth < this.scrollWidth)
+			$ele.attr('title', $ele.text());
+	});
+	
+	
+
+</script>

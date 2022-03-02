@@ -1,0 +1,205 @@
+<!-- Modal -->
+<div class="modal fade" id="memberInfo" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><%= member_info.Email %></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<% Object.keys(member_info).forEach(function (key) { %>
+				
+				<div class="form-row align-items-center mb-3">
+					<div class="col-sm-2">
+						<h5 class="mt-2"><%= key %></h5>
+					</div>
+					<div class="col-sm-10">
+						<%= member_info[key] %>
+					</div>
+				</div>
+				<% }) %>
+				
+				
+				<% if(0) { %>
+				
+				<hr />
+				
+				
+				<div class="mb-3">
+					<div class="row">
+						<div class="col-sm-6">
+							<button id="chgLoginPasswordBtn" class="btn btn-info btn-block mb-2"><%= __("account_ChgPWBTN") %></button>
+						</div>
+						<div class="col-sm-6">
+							<button id="chgWithdrawPasswordBtn" class="btn btn-info btn-block mb-2"><%= __("account_ChgWDBTN") %></button>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				<form class="form m-0" role="form" autocomplete="off" id="chgLoginPassword" novalidate="" method="POST" action="/admin/member-chgpasswd" style="display:none;">
+					<input type="hidden" name="chg_type" value="login" />
+					<input type="hidden" name="sdd_address" value="<%= member_info.SDDAddress %>" />
+					<hr>
+					<div class="mt-3">
+						<div class="form-row align-items-center mb-3">
+							<div class="col-12 col-lg-2 col-md-2">
+								<h5 class="mt-2">New Login Password</h5>
+							</div>
+							<div class="col-12 col-lg-4 col-md-4">
+								<input type="password" class="form-control mb-2" name="new_password" required />
+							</div>
+							<div class="col-12 col-lg-2 col-md-2">
+								<h5 class="mt-2">New Password Check</h5>
+							</div>
+							<div class="col-12 col-lg-4 col-md-4">
+								<input type="password" class="form-control mb-2" name="new_password_check" required />
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="mt-3">
+						<button class="btn btn-success btn-block mb-2">Submit</button>
+					</div>
+				</form>
+
+
+				<form class="form m-0" role="form" autocomplete="off" id="chgWithdrawPassword" novalidate="" method="POST" action="/admin/member-chgpasswd" style="display:none;">
+					<% if(is_wallet) { %>
+					<input type="hidden" name="chg_type" value="wallet" />
+					<input type="hidden" name="sdd_address" value="<%= member_info.SDDAddress %>" />
+					<hr>
+					<div class="mt-3">
+						<div class="form-row align-items-center mb-3">
+							<div class="col-12 col-lg-2 col-md-2">
+								<h5 class="mt-2">New Wallet Password</h5>
+							</div>
+							<div class="col-12 col-lg-4 col-md-4">
+								<input type="password" class="form-control mb-2" name="new_password" required />
+							</div>
+							<div class="col-12 col-lg-2 col-md-2">
+								<h5 class="mt-2">New Password Check</h5>
+							</div>
+							<div class="col-12 col-lg-4 col-md-4">
+								<input type="password" class="form-control mb-2" name="new_password_check" required />
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="mt-3">
+						<button class="btn btn-success btn-block mb-2">Submit</button>
+					</div>
+					<% } else { %>
+					<hr>
+					<div class="mt-3">
+						<div class="form-row align-items-center mb-3">
+							<div class="col-12 col-lg-10 col-md-2">
+								<h5 class="mt-2">Not Set Wallet Password.</h5>
+							</div>
+							<div class="col-12 col-lg-2 col-md-3">
+
+							</div>
+						</div>
+					</div>
+					<hr />
+					<% } %>
+				</form>
+				
+				
+				<% } %>
+				
+				
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<script>
+	$(document).ready(function() {
+		$('#chgLoginPassword').bootstrapValidator({
+			message: 'This value is not valid',
+			feedbackIcons: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields: {
+				new_password: {
+					message: 'The Password is not valid',
+					validators: {
+						notEmpty: {
+							message: 'The Password is required and cannot be empty'
+						},
+						stringLength: {
+							min: 6,
+							max: 30,
+							message: 'The Password must be more than 6 and less than 30 characters long'
+						},
+						regexp: {
+							regexp: /^[a-zA-Z0-9_]+$/,
+							message: 'The Password can only consist of alphabetical, number and underscore'
+						}
+					}
+				},
+				new_password_check: {
+					message: 'The Password is not valid',
+					validators: {
+						notEmpty: {
+							message: 'The Password is required and cannot be empty'
+						},
+						stringLength: {
+							min: 6,
+							max: 30,
+							message: 'The Password must be more than 6 and less than 30 characters long'
+						},
+						regexp: {
+							regexp: /^[a-zA-Z0-9_]+$/,
+							message: 'The Password can only consist of alphabetical, number and underscore'
+						}
+					}
+				}
+			}
+		})
+		.on('success.form.bv', function(e) {
+            $("#chgLoginPassword").submit();
+        });
+
+	});
+</script>
+
+
+
+
+
+
+<script>
+	$( "#chgLoginPasswordBtn" ).click(function() {
+		$( "#chgLoginPassword" ).toggle( "fast", function() {});
+
+		$(this).text(function(i, text){
+			return text === "<%= __("account_ChgPWBTN") %>" ? "<%= __("common_Cancel") %>" : "<%= __("account_ChgPWBTN") %>";
+		})
+
+	});
+
+	$( "#chgWithdrawPasswordBtn" ).click(function() {
+		$( "#chgWithdrawPassword" ).toggle( "fast", function() {});
+
+		$(this).text(function(i, text){
+			return text === "<%= __("account_ChgWDBTN") %>" ? "<%= __("common_Cancel") %>" : "<%= __("account_ChgWDBTN") %>";
+		})
+
+	});
+</script>

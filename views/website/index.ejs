@@ -1,0 +1,184 @@
+<% include ./../_website_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_website_theme/nav.ejs %>
+	<!-- Banner -->
+	<div class="banner static-banner clearfix ">
+		<div class="slider-wrapper theme-default">
+			<div id="sliderNivo" class="nivoSlider">
+				<img src="/images/racing_banner.jpg" />
+				<img src="/images/racing_banner2.jpg" />
+				<img src="/images/racing_banner3.jpg" />
+			</div>
+		</div>
+		<!-- <img src="/images/racing_banner.jpg" alt=""> -->
+	</div>
+	<!-- section start -->
+	<!-- ================ -->
+	<section id="sdd_coin" class="pv-45 clearfix mb-5 ">
+		<div class="container mb-5">
+			<div class="row justify-content-lg-center mb-5">
+				<div class="col-lg-10">
+					<h1 class="intro text-center mt-4 "><strong><%= __("index_1_Main") %></strong></h1>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-lg-6">
+					<div class="feature-box-2 object-non-visible animated object-visible fadeInLeftSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+						<span class="icon without-bg"><i class="fa text-default fa-laptop"></i></span>
+						<div class="body">
+							<h3 class="title"><%= __("index_1_Title1") %></h3>
+							<p class="pitch_text"><%= __("index_1_Context1") %></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="feature-box-2 object-non-visible animated object-visible fadeInRightSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+						<span class="icon without-bg"><i class="fa text-default fa-heart-o"></i></span>
+						<div class="body">
+							<h3 class="title"><%= __("index_1_Title2") %></h3>
+							<p class="pitch_text"><%= __("index_1_Context2") %></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-lg-12">
+					<div class="feature-box-2 object-non-visible animated object-visible fadeInUpSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+						<span class="icon without-bg"><i class="fa text-default fa-money"></i></span>
+						<div class="body">
+							<h3 class="title"><%= __("index_1_Title3") %></h3>
+							<p class="pitch_text"><%= __("index_1_Context3") %></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- section end -->
+	<!-- section start -->
+	<!-- ================ -->
+	<section id="grand_derby_holdem_masters_excellence" class="light-gray-bg pv-45 clearfix">
+		<div class="container pv-45">
+			<div class="row justify-content-lg-center mb-5">
+				<div class="col-lg-10">
+					<h1 class="intro text-center mt-4 "><strong><%= __("index_2_Main") %></strong></h1>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<!-- Trust -->
+				<div class="col-lg-4">
+					<div class="pv-30 ph-20 feature-box sdd-box bordered shadow text-center object-non-visible" data-animation-effect="fadeInLeftSmall" data-effect-delay="100">
+						<h3><%= __("index_2_Title1") %></h3>
+						<div class="separator clearfix"></div>
+						<span class="icon icon-sdd default-bg circle"><i class="fa fa-diamond fa-2x "></i></span>
+						<ul class="large text-left mt-2">
+							<li class="large">
+								<%= __("index_2_Context1_1") %>
+							</li>
+							<li class="large">
+								<%= __("index_2_Context1_2") %>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- New Game -->
+				<div class="col-lg-4">
+					<div class="pv-30 ph-20 feature-box sdd-box bordered shadow text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+						<h3><%= __("index_2_Title2") %></h3>
+						<div class="separator clearfix"></div>
+						<span class="icon icon-sdd default-bg circle"><i class="fa fa-desktop fa-2x "></i></span>
+						<ul class="large text-left mt-2">
+							<li class="large">
+								<%= __("index_2_Context2_1") %>
+							</li>
+							<li class="large">
+								<%= __("index_2_Context2_2") %>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- New Game -->
+				<div class="col-lg-4">
+					<div class="pv-30 ph-20 feature-box sdd-box bordered shadow text-center object-non-visible" data-animation-effect="fadeInRightSmall" data-effect-delay="100">
+						<h3><%= __("index_2_Title3") %></h3>
+						<div class="separator clearfix"></div>
+						<span class="icon icon-sdd default-bg circle"><i class="fa fa-dashboard fa-2x "></i></span>
+						<ul class="large text-left mt-2">
+							<li class="large">
+								<%= __("index_2_Context3_1") %>
+							</li>
+							<li class="large">
+								<%= __("index_2_Context3_2") %>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section start -->
+	<!-- ================ -->
+	<section id="road_map" class=" pv-45  clearfix ">
+		<div class="container pv-45">
+			<div class="row justify-content-lg-center mb-5">
+				<div class="col-lg-10">
+					<h1 class="intro text-center mt-4 "><strong>Road Map</strong></h1>
+				</div>
+			</div>
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-12 " data-animation-effect="fadeInDownSmall">
+					<div class="pv-30 ph-20 feature-box sdd-box bordered shadow text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+						<img src="/images/<%= roadmapIMG %>" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+	<!-- section start -->
+	<!-- ================ -->
+	<section id="collaborate" class=" pv-45 light-gray-bg clearfix ">
+		<div class="container pv-45">
+			<div class="row justify-content-lg-center mb-5">
+				<div class="col-lg-10">
+					<h1 class="intro text-center mt-4 "><strong><%= __("index_3_Title") %></strong></h1>
+					<p class="pitch_text" data-animation-effect="fadeInUpSmall"><%= __("index_3_Context") %></p>
+				</div>
+			</div>
+			<div class="row ">
+				<div class="col-md-4 text-center" data-animation-effect="fadeInDownSmall">
+					<img src="/images/g2e.png" class="img-fluid">
+				</div>
+				<div class="col-md-4 text-center" data-animation-effect="fadeInDownSmall">
+					<img src="/images/gli.png" class="img-fluid">
+				</div>
+				<!--
+				<div class="col-md-3 text-center" data-animation-effect="fadeInDownSmall">
+					<img src="/images/melonbit.png" class="img-fluid">
+				</div>
+				-->
+				<div class="col-md-4 text-center" data-animation-effect="fadeInDownSmall">
+					<img src="/images/gicc.png" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+</div>
+
+<% include ./../_website_theme/footer.ejs %>
+
+<script>
+	$(document).ready(function () {
+		// Nivo
+		$('#sliderNivo').nivoSlider({
+			effect: 'boxRainGrow,boxRainGrowReverse,fold,boxRain,sliceUp',
+			slices: 15,
+			boxCols: 8,
+			boxRows: 4,
+			animSpeed: 2000,
+			pauseTime: 3000
+		});
+	});
+</script>

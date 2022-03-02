@@ -1,0 +1,139 @@
+<% include ./../_admin_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_admin_theme/nav.ejs %>
+	<!-- Content -->
+	<section id="login" class=" pv-45 clearfix mb-5 ">
+		<div class="admin-container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-12 mx-auto" data-animation-effect="fadeInDownSmall">
+					<!-- form card login -->
+					<div class="card rounded-0">
+						<div class="card-header">
+							<h4 class="mb-0">Admin Accounts</h4>
+						</div>
+						<div class="card-body">
+							<% if(errors) { errors.forEach(function(error) { %>
+							<div class="alert alert-danger  alert-dismissible fade show" role="alert">
+								<%= error.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      		</div>
+                      		<%})} %>
+                      		
+                      		<% if(success) { success.forEach(function(message) { %>
+							<div class="alert alert-success  alert-dismissible fade show" role="alert">
+								<%= message.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      		</div>
+                      		<%})} %>
+                      		
+							<% if(is_account) { %>
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4>Company Address (ETH)</h4>
+								</div>
+								<div class="col-sm-7">
+									<div id="showAddr" style="display:inline">
+										<strong><%= account.config_content %></strong>
+									</div>
+									<div id="modifyAddr" style="display:none">
+										<input type="text" class="form-control mb-2" id="companyAddress" name="companyAddress" value="<%= account.config_content %>" placeholder="Company Address" />
+										<input type="password" class="form-control mb-2" id="companyPasswd" name="companyPasswd" placeholder="Password" />
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<button class="btn btn-primary btn-block mb-2" id="modifyAddrBtn">Modify Address</button>
+									<button class="btn btn-success btn-block mb-2" id="modifyAddrSubmit" style="display:none;">Submit</button>
+								</div>
+							</div>
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4>Regist Date </h4>
+								</div>
+								<div class="col-sm-7">
+									<strong><%= account.reg_date %></strong>
+								</div>
+								<div class="col-sm-2">
+								</div>
+							</div>
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4>Last Update Date</h4>
+								</div>
+								<div class="col-sm-7">
+									<strong><%= account.update_date %></strong>
+								</div>
+								<div class="col-sm-2">
+								</div>
+							</div>
+							<% } else { %>
+							<form class="form m-0" role="form" autocomplete="off" id="adminAccount" novalidate="" method="POST" action="/admin/account">
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-3">
+										<h4>Company Address (ETH)</h4>
+									</div>
+									<div class="col-sm-7">
+										<input type="text" class="form-control mb-2" id="companyAddress" name="companyAddress" placeholder="Company Address" />
+										<input type="password" class="form-control mb-2" id="companyPasswd" name="companyPasswd" placeholder="Password" />
+									</div>
+									<div class="col-sm-2">
+										<button class="btn btn-primary btn-block mb-2" id="registAddr"> Regist</button>
+									</div>
+								</div>
+							</form>
+							
+							<% } %>
+						</div>
+						<!--/card-block-->
+					</div>
+					<!-- /form card login -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+</div>
+<% include ./../_admin_theme/footer.ejs %>
+
+<script>
+$( "#modifyAddrBtn" ).click(function() {
+	$( "#showAddr" ).toggle( "fast", function() {});
+	$( "#modifyAddr" ).toggle( "fast", function() {});
+	$( "#modifyAddrSubmit" ).toggle();
+	
+	$(this).text(function(i, text){
+		return text === "Modify Address" ? "Cancel" : "Modify Address";
+	})
+	
+});
+</script>
+
+
+
+<script>
+	$("#modifyAddrSubmit").on("click", function() {
+		var addr = $("#companyAddress").val();
+		var form = document.createElement('form');
+		
+		var objs1;
+		objs1 = document.createElement('input');
+		objs1.setAttribute('type', 'hidden');
+		objs1.setAttribute('name', 'companyAddress');
+		objs1.setAttribute('value', addr);
+		form.appendChild(objs1);
+		
+		var objs2;
+		var pwValue = $("#companyPasswd").val();
+		objs2 = document.createElement('input');
+		objs2.setAttribute('type', 'hidden');
+		objs2.setAttribute('name', 'companyPasswd');
+		objs2.setAttribute('value', pwValue);
+		form.appendChild(objs2);
+		
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', "/admin/account");
+		document.body.appendChild(form);
+		form.submit();
+	});
+</script>

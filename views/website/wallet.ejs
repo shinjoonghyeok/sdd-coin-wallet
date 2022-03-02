@@ -1,0 +1,285 @@
+<% include ./../_website_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_website_theme/nav.ejs %>
+	<!-- Content -->
+	<section id="wallet" class=" pv-45 clearfix  mb-5">
+		<div class="container ">
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-12 " data-animation-effect="fadeInDownSmall">
+					<div class="card rounded-0 ">
+						<div class="card-header">
+							<h3 class="mb-0"><%= __("wallet_Title") %></h3>
+						</div>
+						<div class="card-body">
+							<%- messages('website/message', locals) %>
+							
+							<% if(is_wallet_pw=='no') { %>
+							<% if(errors) { errors.forEach(function(error) { %>
+							<div class="alert alert-danger  alert-dismissible fade show" role="alert">
+								<%= error.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      		</div>
+                      		<%})} %>
+							<form class="form m-0" role="form" autocomplete="off" id="formWallet" novalidate="" method="POST" action="/wallet-password">
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu9") %></h5>
+									</div>
+									<div class="col-sm-8">
+										<div class="input-group mb-2">
+                            				<input type="password" class="form-control" placeholder="Password" name="password">
+                            				<input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+                          				</div>
+									</div>
+									<div class="col-sm-2">
+										<button class="btn btn-primary btn-block mb-2"> <%= __("common_submin") %></button>
+									</div>
+								</div>
+							</form>
+							<% } else { %>
+							<% if(errors) { errors.forEach(function(error) { %>
+							<div class="alert alert-danger  alert-dismissible fade show" role="alert">
+								<%= error.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      		</div>
+                      		<%})} %>
+                      		
+                      		<% if(success) { success.forEach(function(message) { %>
+							<div class="alert alert-success  alert-dismissible fade show" role="alert">
+								<%= message.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      		</div>
+                      		<%})} %>
+                      		
+							<form class="form m-0" role="form" autocomplete="off" id="formWallet" novalidate="" method="POST" action="/wallet-withdraw">
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu1") %></h5>
+									</div>
+									<div class="col-sm-10">
+										<%= sdd_coin_address %>
+									</div>
+								</div>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu2") %></h5>
+									</div>
+									<div class="col-sm-10">
+										<%= ether_balance %>
+									</div>
+								</div>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu3") %></h5>
+									</div>
+									<div class="col-sm-10">
+										<%= token_balance %>
+									</div>
+								</div>
+								
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu4") %></h5>
+									</div>
+									<div class="col-sm-10">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="withdraw_type" id="withdraw_type_ether" value="ether" checked="checked" />
+											<label class="form-check-label" for="withdraw_type_ether">Ethereum</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="withdraw_type" id="withdraw_type_token" value="token" />
+											<label class="form-check-label" for="withdraw_type_token">Token</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-row align-items-center mb-3">
+									<div class="col-12 col-lg-2 col-md-2">
+										<h5 class="mt-2"><%= __("wallet_Menu5") %></h5>
+									</div>
+									<div class="col-12 col-lg-8 col-md-7">
+										<input type="text" class="form-control mb-2" name="withdraw_target" />
+									</div>
+									<div class="col-12 col-lg-2 col-md-3">
+										
+									</div>
+								</div>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-12 col-md-2">
+										<h5 class="mt-2"><%= __("wallet_Menu6") %></h5>
+									</div>
+									<div class="col-12 col-md-3">
+										<input type="text" class="form-control mb-2" name="withdraw_amount" />
+									</div>
+									<div class="col-12 col-md-1">
+										<h5 class="mt-2 text-center"><%= __("wallet_Menu7") %></h5>
+									</div>
+									<div class="col-12  col-md-4 ">
+										<input type="text" name="withdraw_fee" value="<%= withdraw_fee %>" data-slider="true" data-slider-range="0,200" data-slider-step="0.1" /> (GWEI)
+									</div>
+									<div class="col-12  col-md-2 ">
+										
+									</div>
+								</div>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-2">
+										<h5 class="mt-2"><%= __("wallet_Menu8") %></h5>
+									</div>
+									<div class="col-sm-8">
+										<div class="input-group mb-2">
+                            				<input type="password" class="form-control" placeholder="Password" name="password">
+                          				</div>
+									</div>
+									<div class="col-sm-2">
+										<!--<button class="btn btn-primary btn-block mb-2" onclick="this.disabled=true;this.form.submit();"> Withdraw</button>-->
+										<button onclick="loading(true,'wallet');" class="btn btn-primary btn-block mb-2" > <%= __("common_Withdraw") %></button>
+									</div>
+								</div>
+							</form>
+							
+							<hr />
+							
+							<fieldset>
+								<legend>Search</legend>
+								<div class="form-row align-items-center mb-3">
+									<div class="col-sm-4">
+										<div id="tt" class="input-group mb-2">
+											<input type="text" class="form-control" name="startDate" id="startDate" />
+											<div class="input-group-append">
+												<span class="input-group-text">to</span>
+											</div>
+											<input type="text" class="form-control" name="endDate" id="endDate" />
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<!--<input type="text" class="form-control mb-2" name="searchStr" placeholder="from / to / txhash" />-->
+									</div>
+									<div class="col-sm-2">
+										<button id="searchWithdraw" class="btn btn-success btn-block mb-2" > <%= __("common_Search") %></button>
+									</div>
+								</div>
+							</fieldset>
+
+							<div style="overflow-x:none;" id="withdrawList">
+								
+							</div>
+							
+							
+							<% } %>
+							
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+</div>
+
+<div id="outside"></div>
+
+<% include ./../_website_theme/footer.ejs %>
+
+
+<script>
+$("[data-slider]")
+.each(function () {
+	var input = $(this);
+	$("<span>")
+		.addClass("output")
+		.insertAfter($(this));
+})
+.bind("slider:ready slider:changed", function (event, data) {
+	$(this)
+		.nextAll(".output:first")
+		.html(data.value.toFixed(1));
+});
+</script>
+
+
+<script>
+
+	
+	
+$(document).ready(function() {
+	var nowDate = new Date().format("yyyy-MM-dd");
+	$('#startDate').val(nowDate);
+	$('#endDate').val(nowDate);
+	
+	
+	$("#withdrawList").load("/withdraw-list/" + $("#startDate").val() + "/" + $("#endDate").val(), function(response, status, xhr) {
+		if (status === "success") {
+			var txtable = $('#txList').DataTable({
+				"searching": false,
+				"pageLength": 10,
+				"lengthChange": false,
+				"order": [[ 2, "desc" ]]
+			});
+			var tokentable = $('#tokenList').DataTable({
+				"searching": false,
+				"pageLength": 10,
+				"lengthChange": false,
+				"order": [[ 2, "desc" ]]
+			});
+			$('#startDate').change( function() { txtable.draw(); tokentable.draw(); } );
+    		$('#endDate').change( function() { txtable.draw(); tokentable.draw(); } );
+		}
+	});
+	
+	
+	$("#searchWithdraw").on("click", function() {
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		loading(true,"withdrawList");
+		$("#withdrawList").load("/withdraw-list/" + startDate + "/" + endDate, function(response, status, xhr) {
+			if (status === "success") {
+				var txtable = $('#txList').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				var tokentable = $('#tokenList').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				
+				$('#startDate').change( function() { txtable.draw(); tokentable.draw(); } );
+    			$('#endDate').change( function() { txtable.draw(); tokentable.draw(); } );
+			}
+			loading(false,"withdrawList");
+		});
+	});
+	
+	
+	
+	
+	
+
+});
+
+
+$(function() {
+	var getCookie = function(name) {
+		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return value? value[2] : null;
+	};
+	
+	var calLang = 'ko';
+	if(getCookie('lang')=='kr') calLang = 'ko';
+	else calLang = getCookie('lang');
+	$.datepicker.setDefaults($.datepicker.regional[calLang]);
+	$( "#startDate" ).datepicker({
+		//$.datepicker.regional[ getCookie('lang') ]
+		dateFormat: 'yy-mm-dd'
+	});
+	$( "#endDate" ).datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+});
+	
+
+</script>

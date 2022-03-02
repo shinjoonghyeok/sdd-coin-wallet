@@ -1,0 +1,82 @@
+<div class="header-container">
+  <header class="header  clearfix">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-xl-3 hidden-md-down">
+          <!-- header-first start -->
+          <!-- ================ -->
+          <div class="header-first clearfix">
+            <!-- logo -->
+            <div id="logo" class="logo">
+              <a class="nav-link" href="/admin">
+                <img id="logo_img" src="/images/sdd_logo.png" alt="SDD Tech">
+              </a>
+            </div>
+          </div>
+          <!-- header-first end -->
+        </div>
+        <div class="col-lg-8 col-xl-9">
+          <!-- header-second start -->
+          <!-- ================ -->
+          <div class="header-second clearfix">
+            <!-- main-navigation start -->
+            <div class="main-navigation  animated">
+              <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="navbar-brand clearfix hidden-lg-up">
+                  <!-- logo -->
+                  <div id="logo-mobile" class="logo">
+                    <a class="nav-link" href="/admin">
+                      <img id="logo-img-mobile" src="/images/sdd_logo _m.png" alt="SDD Tech">
+                    </a>
+                  </div>
+                </div>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-collapse-1"
+                  aria-controls="navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                  <!-- main-menu -->
+                  <ul class="navbar-nav ml-lg-auto">
+                    <% if(user && user.role === 1) { %>
+                      <li class="nav-item">
+                        <a class="nav-link <% if(page_name === 'member-admin') { %>active <%} %> " href="/admin/member-admin">Member List</a>
+                      </li>
+                    <% } %>
+                    <% if(user && user.role === 1) { %>
+                      <li class="nav-item">
+                        <a class="nav-link <% if(page_name === 'transaction-admin') { %>active <%} %> " href="/admin/transaction-admin">Transaction Details</a>
+                      </li>
+                    <% } %>
+
+					<% if(user && user.role === 1) { %>
+                      <li class="nav-item">
+                        <a class="nav-link <% if(page_name === 'faq-admin') { %>active <%} %> " href="/admin/faq-admin">FAQ</a>
+                      </li>
+                    <% } %>
+                   
+                    <% if(user && user.role === 1) { %>
+                      <li class="nav-item">
+                        <a class="nav-link <% if(page_name === 'account') { %>active <%} %> " href="/admin/account">Account</a>
+                      </li>
+                    <% } %>
+                    <% if(user && user.role === 1) { %>
+                      <li class="login-nav pl-lg-4">
+                        <a href="/admin/logout" class="login-button <% if(page_name === 'login') { %>active <%} %>">
+                          <i class="fa fa-sign-out"></i> Log Out
+                        </a>
+                      </li>
+                    <% } %>
+                  </ul>
+                  <!-- main-menu end -->
+                </div>
+              </nav>
+            </div>
+            <!-- main-navigation end -->
+          </div>
+          <!-- header-second end -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+</div>

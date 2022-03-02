@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div class="modal fade" id="widthdrawDetail" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><%= txHash %></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<% Object.keys(showObj).forEach(function (key) { %>
+				
+				<div class="form-row align-items-center mb-3">
+					<div class="col-sm-2">
+						<h5 class="mt-2"><%= key %></h5>
+					</div>
+					<div class="col-sm-10">
+						<%= showObj[key] %>
+					</div>
+				</div>
+				<% }) %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

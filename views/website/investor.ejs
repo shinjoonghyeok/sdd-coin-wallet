@@ -1,0 +1,132 @@
+<% include ./../_website_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_website_theme/nav.ejs %>
+	<!-- Banner -->
+	<div class="banner static-banner clearfix ">
+		<div class="banner_text">Investor</div>
+		<img src="/images/banner_page.png" alt="">
+	</div>
+	<!-- Content -->
+	<section id="about" class=" pv-45 clearfix mb-5 ">
+		<div class="container pb-5">
+			<div class="row justify-content-lg-center">
+				<div class="col-lg-12 " data-animation-effect="fadeInDownSmall">
+					<h2 class="text-center title"><%= __("invest_Title1") %><br><%= __("invest_Title2") %></h2>
+					<a href="/wp" class="white-paper-download"><%= __("invest_WhitePaper") %></a>
+					<!--<h3 class="text-center mt-3">Current SDD Coin Price = 0.00010 ETH </h3>-->
+					
+					<% if(messages.success) { %>
+					<div class="alert alert-danger  alert-dismissible fade show" role="alert">
+						<%= messages.success %>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					
+					<% } %>
+					
+					<%- messages('website/message', locals) %>
+					
+					<% if(is_logged) { %>
+					<div class="card rounded-0 mt-4">
+						<div class="card-body">
+							<% if(errors) { errors.forEach(function(error) { %>
+							<div class="alert alert-danger  alert-dismissible fade show" role="alert">
+								<%= error.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<%})} %>
+
+							<% if(success) { success.forEach(function(success) { %>
+							<div class="alert alert-success  alert-dismissible fade show" role="alert">
+								<%= success.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<%})} %>
+						
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4><%= __("invest_Menu1") %></h4>
+								</div>
+								<div class="col-sm-9">
+									<div <% if(!is_addr) { %>class="answer-str-error"<% } %>>
+										<div class="mb-2"><strong><%= admin_addr %></strong></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4><%= __("invest_Menu2") %></h4>
+								</div>
+								<div class="col-sm-7">
+									<div class="mb-2"><strong><%= member_addr %></strong></div>
+								</div>
+								<div class="col-sm-2">
+								</div>
+							</div>
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4><%= __("invest_Menu3") %></h4>
+								</div>
+								<div class="col-sm-7">
+									<div id="showEtherAddr" style="display:inline;">
+										<div class="mb-2"><strong><%= ether_addr %></strong></div>
+									</div>
+									<div id="editEtherAddr" style="display:none;">
+										<input type="text" class="form-control mb-2" name="ether_addr" id="ether_addr" placeholder="<%= __("invest_Input1") %>" />
+										<input type="password" class="form-control mb-2" name="user_password" id="user_password" placeholder="<%= __("invest_Input2") %>" />
+									</div>
+								</div>
+
+								<div class="col-sm-2">
+									<button class="btn btn-primary btn-block mb-2" id="registEtherAddrBTN"><%= __("common_Enroll") %></button>
+									<button class="btn btn-success btn-block mb-2" id="registOKBTN" style="display:none;"><%= __("common_Regist") %></button>
+								</div>
+							</div>
+							<div class="form-row text-center mb-3">
+								<div class="col-sm-12">
+									<h4><%= __("invest_Warning") %></h4>
+								</div>
+							</div>
+							
+							
+							<div class="form-row align-items-center mb-3">
+								<div class="col-sm-3">
+									<h4><%= __("invest_Menu4") %></h4>
+								</div>
+								<% if(recommender_id) { %>
+								<div class="col-sm-7">
+									<div class="mb-2"><strong><%= recommender_id %></strong></div>
+								</div>
+								<div class="col-sm-2">
+								</div>
+								<% } else { %>
+								<div class="col-sm-7">
+									<input type="text" class="form-control mb-2" name="recommender_id" id="recommender_id" />
+								</div>
+								<div class="col-sm-2">
+									<button class="btn btn-success btn-block mb-2" id="recommenderOKBTN"><%= __("common_Regist") %></button>
+								</div>
+								<% } %>
+							</div>
+							
+						</div>
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+</div>
+<% include ./../_website_theme/footer.ejs %>
+
+<script src="/js/sdd/investor.js"></script>
+
+
+
+
+
+
+

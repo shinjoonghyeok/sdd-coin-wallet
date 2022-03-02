@@ -1,0 +1,149 @@
+<% include ./../_admin_theme/header.ejs %>
+<div class="page-wrapper">
+	<% include ./../_admin_theme/nav.ejs %>
+	<!-- Content -->
+	<section id="login" class=" pv-45 clearfix mb-5 ">
+		<div class="admin-container">
+			<div class="container-fluid ">
+				<div class="row justify-content-md-center">
+					<div class="col-md-12 mx-auto" data-animation-effect="fadeInDownSmall">
+	
+					<!-- form card login -->
+						<div class="card rounded-0">
+							<div class="card-header">
+								<h4 class="mb-0">Transaction Detail </h4>
+							</div>
+							<div class="card-body">
+								<fieldset>
+									<legend>Search</legend>
+									<div class="form-row align-items-center mb-3">
+										<div class="col-sm-4">
+											<div id="tt" class="input-group mb-2">
+												<input type="text" class="form-control" name="startDate" id="startDate" />
+												<div class="input-group-append">
+													<span class="input-group-text">to</span>
+												</div>
+												<input type="text" class="form-control" name="endDate" id="endDate" />
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<input type="text" class="form-control mb-2" id="searchStr" name="searchStr" placeholder="From / To / Hash" />
+										</div>
+										<div class="col-sm-2">
+											<button id="searchTransaction" class="btn btn-success btn-block mb-2" > Search</button>
+										</div>
+									</div>
+								</fieldset>
+
+								<div style="overflow-x:none;" id="transactionList">
+								</div>
+							</div>
+						<!--/card-block-->
+						</div>
+					<!-- /form card login -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+</div>
+
+<div id="transactionDetail"></div>
+
+<% include ./../_admin_theme/footer.ejs %>
+
+
+<script>
+	$(document).ready(function() {
+		var nowDate = new Date().format("yyyy-MM-dd");
+		$('#startDate').val(nowDate);
+		$('#endDate').val(nowDate);
+		
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		var searchStr = $("#searchStr").val();
+		
+		if(searchStr=="" ) searchStr = "^NONE^";
+
+		$("#transactionList").load("/admin/transaction-list/" + startDate + "/" + endDate + "/" + searchStr, function(response, status, xhr) {
+			if (status === "success") {
+				var txTable = $('#txTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				var etherTable = $('#etherTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				var tokenTable = $('#tokenTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				
+				$('#startDate').change( function() { txTable.draw();etherTable.draw();etherTable.draw(); } );
+				$('#endDate').change( function() { txTable.draw();etherTable.draw();etherTable.draw();  } );
+			}
+		});
+	});
+	
+	$("#searchTransaction").on("click", function() {
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		var searchStr = $("#searchStr").val();
+
+		if(searchStr=="" ) searchStr = "^NONE^";
+
+		
+		loading(true,"transactionList");
+		$("#transactionList").load("/admin/transaction-list/" + startDate + "/" + endDate + "/" + searchStr, function(response, status, xhr) {
+			if (status === "success") {
+				var txTable = $('#txTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				var etherTable = $('#etherTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				var tokenTable = $('#tokenTable').DataTable({
+					"searching": false,
+					"pageLength": 10,
+					"lengthChange": false,
+					"order": [[ 2, "desc" ]]
+				});
+				
+				$('#startDate').change( function() { txTable.draw();etherTable.draw();etherTable.draw(); } );
+				$('#endDate').change( function() { txTable.draw();etherTable.draw();etherTable.draw();  } );
+			}
+			loading(false,"transactionList");
+		});
+	});
+	
+	
+	$(function() {
+		$( "#startDate" ).datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
+		$( "#endDate" ).datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
+	});
+
+	$('.mightOverflow').each(function() {
+		var $ele = $(this);
+		if (this.offsetWidth < this.scrollWidth)
+			$ele.attr('title', $ele.text());
+	});
+
+</script>

@@ -1,0 +1,79 @@
+<div class="modal fade" id="editFaq" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">FAQ Edit</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<form class="form m-0" role="form" autocomplete="off" id="formFAQ" novalidate="" method="POST" action="/admin/faq-update">
+			<div class="modal-body">
+				<div class="form-row align-items-center mb-3">
+					<div class="col-12 col-lg-2 col-md-2">
+						<h5 class="mt-2">Title</h5>
+					</div>
+					<div class="col-12 col-lg-8 col-md-7">
+						<input type="text" class="form-control mb-2" name="faq_title" value="<%= faqInfo.title %>" />
+						<input type="hidden" name="faq_idx" value="<%= faqInfo.index %>" />
+					</div>
+					<div class="col-12 col-lg-2 col-md-3">
+
+					</div>
+				</div>
+				
+				<div class="form-row align-items-center mb-3">
+					<div class="col-12 col-lg-2 col-md-2">
+						<h5 class="mt-2">Language</h5>
+					</div>
+					<div class="col-12 col-lg-8 col-md-7">
+						<select name="faq_language" class="form-control mb-2">
+							<option value="en" <% if(faqInfo.language=='en') { %> selected="selected"  <% } %>>English</option>
+							<option value="kr" <% if(faqInfo.language=='kr') { %> selected="selected"  <% } %>>Korea</option>
+							<option value="jp" <% if(faqInfo.language=='jp') { %> selected="selected"  <% } %>>Japan</option>
+						</select>
+					</div>
+					<div class="col-12 col-lg-2 col-md-3">
+
+					</div>
+				</div>
+				
+				<div class="form-row align-items-center mb-3">
+					<div class="col-12 col-lg-2 col-md-2">
+						<h5 class="mt-2">Content</h5>
+					</div>
+					<div class="col-12 col-lg-8 col-md-7">
+						<textarea class="form-control mb-2" style="height:300px;" name="faq_content"><%= faqInfo.content %></textarea>
+					</div>
+					<div class="col-12 col-lg-2 col-md-3">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-warning" id="deleteFAQ">Delete</button>
+				<button type="submit" class="btn btn-success mb-1">OK</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	$("#deleteFAQ").on("click", function() {
+		console.log("Delete");
+		var form = document.createElement('form');
+		var objs;
+		objs = document.createElement('input');
+		objs.setAttribute('type', 'hidden');
+		objs.setAttribute('name', 'faq_idx');
+		objs.setAttribute('value', <%= faqInfo.index %>);
+		form.appendChild(objs);
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', "/admin/faq-delete");
+		document.body.appendChild(form);
+		form.submit();
+	});
+</script>
